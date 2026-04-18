@@ -35,7 +35,7 @@ This project is submitted under **Option A** of the Secure Web Development CA. A
 The application is a multi-user travel blog built with Python/Flask, SQLite, and Flask-SQLAlchemy. It supports four distinct user roles (super_admin, admin, author, user) and provides full CRUD operations on blog posts, user accounts, comments, likes, bookmarks, and contact messages.
 
 **Primary Security Focus:**
-The original codebase contained significant security weaknesses across authentication, authorisation, input validation, session management, and server configuration — representing real-world vulnerabilities from OWASP Top 10 (2021) categories A01 through A07. All security improvements were implemented entirely by the student.
+There was an input validation, configuration, and authorization security flaw and an authentication security flaw in the original codebase. The current project considers and works on the six vulnerabilities mentioned below only: SQL Injection, password brute-forcing, role-based access control, password strength enforcement, email validation, and hardcoded secret key protection.
 
 ---
 
@@ -74,7 +74,7 @@ A full audit of the codebase identified **thirteen pre-existing vulnerabilities*
 | ID | Vulnerability | File | OWASP | CWE | Severity |
 |----|--------------|------|-------|-----|----------|
 | V-01 | Hardcoded `SECRET_KEY = "myFlaskApp4Fun"` | `app/config.py` | A05 | CWE-798 | Critical |
-| V-02 | IDOR — account update/delete accepts any user `id` in URL | `app/account/routes.py` | A01 | CWE-639 | High |
+
 | V-03 | Admin routes (`user_update`, `user_delete`, `user_block`) had no role check | `app/dashboard/routes.py` | A01 | CWE-285 | High |
 | V-04 | No rate limiting on login — unlimited brute-force attempts allowed | `app/account/routes.py` | A07 | CWE-307 | High |
 | V-05 | No password complexity — single character passwords accepted at signup | `app/account/routes.py` | A07 | CWE-521 | Medium |
